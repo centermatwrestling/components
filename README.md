@@ -1,5 +1,5 @@
 # &lt;cmw-*&gt;
-
+[![Build Status](https://travis-ci.org/centermatwrestling/components.svg?branch=master)](https://travis-ci.org/centermatwrestling/components.svg)
 > A bare minimum custom element starter-kit using [Polymer](http://www.polymer-project.org/).
 >
 > Like [Yeoman](http://yeoman.io/)? Use the [generator-element](https://www.npmjs.org/package/generator-element) instead.
