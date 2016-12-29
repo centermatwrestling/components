@@ -1,4 +1,4 @@
-# &lt;my-repo&gt;
+# &lt;cmw-*&gt;
 
 > A bare minimum custom element starter-kit using [Polymer](http://www.polymer-project.org/).
 >
