@@ -21,7 +21,7 @@ install:
 - bower install
 
 script:
-- xvfb-run polymer test
+#- xvfb-run polymer test
 
 after_success:
    '[ ${TRAVIS_PULL_REQUEST} = "false" ] &&
