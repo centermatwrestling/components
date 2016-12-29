@@ -52,9 +52,9 @@
             <div class="card-content">
                 <div style="margin-bottom: 10px;">
                     <span style="font-size: 15px;">
-                        <date-util format="MM/dd/yy" date="{{endDate(event.startDate)}}"></date-util>
+                        <date-util format="MM/dd/yy" date="{{toDate(event.startDate)}}"></date-util>
                         -
-                        <date-util format="MM/dd/yy" date="{{endDate(event.endDate)}}"></date-util></span>
+                        <date-util format="MM/dd/yy" date="{{toDate(event.endDate)}}"></date-util></span>
                     <div style="text-align: right;float:right;">
                         <iron-icon icon="social:notifications-none"></iron-icon>
                         <iron-icon icon="hardware:tv"></iron-icon>
@@ -101,7 +101,7 @@
                   observer: '_eventChanged'
               }
             },
-            endDate: function(dateString) {
+            toDate: function(dateString) {
               return new Date(dateString);
             },
 
