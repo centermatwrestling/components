@@ -32,6 +32,15 @@
         window.onload = function () {
             value = {"name":"Test"};
             var eventCard = document.getElementById("eventCard");
+            eventCard.onNotificationClick = function () {
+              alert('Notifying ' + value.name);
+            };
+            eventCard.onWatchClick = function () {
+                alert('Watching ' + value.name);
+            };
+            eventCard.onExpandClick = function () {
+                alert('Expanding ' + value.name);
+            };
             $.getJSON(url, function (schema) {
                 $.getJSON(urlExample, function (example) {
                     value = example;

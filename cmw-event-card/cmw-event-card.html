@@ -56,9 +56,9 @@
                         -
                         <date-util format="MM/dd/yy" date="{{toDate(event.endDate)}}"></date-util></span>
                     <div style="text-align: right;float:right;">
-                        <iron-icon icon="social:notifications-none"></iron-icon>
-                        <iron-icon icon="hardware:tv"></iron-icon>
-                        <iron-icon icon="launch"></iron-icon>
+                        <paper-icon-button on-tap="onNotificationClick" icon="social:notifications-none"></paper-icon-button>
+                        <paper-icon-button on-tap="onWatchClick" icon="hardware:tv"></paper-icon-button>
+                        <paper-icon-button on-tap="onExpandClick" icon="launch"></paper-icon-button>
                     </div>
                 </div>
                 <div style="height: 140px;">
@@ -103,6 +103,12 @@
             },
             toDate: function(dateString) {
               return new Date(dateString);
+            },
+            onNotificationClick: function() {
+            },
+            onWatchClick: function() {
+            },
+            onExpandClick: function() {
             },
 
             // Fires when an instance of the element is created
