@@ -1,0 +1,137 @@
+<!-- Imports polymer -->
+<link rel="import" href="../../polymer/polymer.html">
+<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+<link rel="import" href="../../iron-icons/social-icons.html">
+<link rel="import" href="../../iron-icons/notification-icons.html">
+<link rel="import" href="../../iron-icons/communication-icons.html">
+<link rel="import" href="../../iron-icons/hardware-icons.html">
+<link rel="import" href="../../iron-icons/iron-icons.html">
+<link rel="import" href="../../iron-image/iron-image.html">
+<link rel="import" href="../../paper-button/paper-button.html">
+<link rel="import" href="../../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../paper-styles/color.html">
+<link rel="import" href="../../paper-styles/typography.html">
+<link rel="import" href="../../paper-card/paper-card.html">
+<link rel="import" href="../../date-util/date-util.html">
+<style is="custom-style">
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    paper-card {
+        max-width: 500px;
+    }
+    .cafe-header { @apply(--paper-font-headline); }
+    .cafe-light { color: var(--paper-grey-600); }
+    .cafe-location {
+        float: right;
+        font-size: 15px;
+        vertical-align: middle;
+    }
+    .cafe-reserve { color: var(--google-blue-500); }
+    iron-icon.star {
+        --iron-icon-width: 16px;
+        --iron-icon-height: 16px;
+        color: var(--paper-amber-500);
+    }
+    iron-icon.star:last-of-type { color: var(--paper-grey-500); }
+    iron-image img {
+        max-height: 35px;
+        max-width: 40px;
+        height: 35px !important;
+        width: 40px !important;
+        cursor: pointer;
+        margin:10px;
+    }
+</style>
+<!-- Defines element markup -->
+<dom-module id="cmw-event-card">
+    <template>
+        <paper-card style="min-width: 350px">
+            <div class="card-content">
+                <div style="margin-bottom: 10px;">
+                    <span style="font-size: 15px;">
+                        <date-util format="MM/dd/yy" date="{{toDate(event.startDate)}}"></date-util>
+                        -
+                        <date-util format="MM/dd/yy" date="{{toDate(event.endDate)}}"></date-util></span>
+                    <div style="text-align: right;float:right;">
+                        <paper-icon-button on-tap="onNotificationClick" icon="social:notifications-none"></paper-icon-button>
+                        <paper-icon-button on-tap="onWatchClick" icon="hardware:tv"></paper-icon-button>
+                        <paper-icon-button on-tap="onExpandClick" icon="launch"></paper-icon-button>
+                    </div>
+                </div>
+                <div style="height: 140px;">
+                    <div>[[event.name]]</div>
+                    <iron-image sizing="contain" style="height: 35px;width: 40px;cursor: pointer;margin:10px;" src="[[event.logoPath]]"></iron-image>
+                    <span class="col s2 center-align material-label"></span></div>
+            </div>
+            <div class="card-reveal" style="display: none;"><a class="black-text" style="cursor: pointer;">
+                <iron-icon class="fullscreen" icon="fullscreen"></iron-icon>
+                <span></span></a><a
+                class="black-text" style="cursor: pointer;">
+                <iron-icon class="flip-to-front" icon="flip-to-front"></iron-icon>
+                <span></span></a>
+                <div><select class="gwt-ListBox browser-default">
+                    <option value="125">125</option>
+                    <option value="133">133</option>
+                    <option value="141">141</option>
+                    <option value="149">149</option>
+                    <option value="157">157</option>
+                    <option value="165">165</option>
+                    <option value="174">174</option>
+                    <option value="184">184</option>
+                    <option value="197">197</option>
+                    <option value="285">285</option>
+                </select><label></label></div>
+                <ul class="collection"></ul>
+            </div>
+        </paper-card>
+    </template>
+
+    <!-- Registers custom element -->
+    <script>
+        Polymer({
+            is: 'cmw-event-card',
+
+            properties: {
+              event: {
+                  type: Object,
+                  notify: true,
+                  observer: '_eventChanged'
+              }
+            },
+            toDate: function(dateString) {
+              return new Date(dateString);
+            },
+            onNotificationClick: function() {
+            },
+            onWatchClick: function() {
+            },
+            onExpandClick: function() {
+            },
+
+            // Fires when an instance of the element is created
+            created: function () {
+            },
+
+            // Fires when the local DOM has been fully prepared
+            ready: function () {
+            },
+
+            // Fires when the element was inserted into the document
+            attached: function () {
+            },
+
+            // Fires when the element was removed from the document
+            detached: function () {
+            },
+
+            // Fires when an attribute was added, removed, or updated
+            attributeChanged: function (name, type) {
+            },
+            _eventChanged: function (event) {
+            }
+        });
+    </script>
+</dom-module>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <title>&lt;my-repo&gt;</title>
+
+    <link rel="import" href="../../polymer/polymer.html"/>
+    <!-- Imports polyfill -->
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="http://alpacajs.org/lib/handlebars/handlebars.min.js"></script>
+    <link type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="http://ajaxorg.github.io/ace-builds/src-noconflict/ace.js"></script>
+    <script src="http://ajaxorg.github.io/ace-builds/src-noconflict/theme-twilight.js"></script>
+    <script src="http://ajaxorg.github.io/ace-builds/src-noconflict/mode-json.js"></script>
+
+    <!-- alpaca -->
+    <link type="text/css" href="//code.cloudcms.com/alpaca/1.5.22/bootstrap/alpaca.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="//code.cloudcms.com/alpaca/1.5.22/bootstrap/alpaca.min.js"></script>
+
+    <!-- Imports custom element -->
+    <link rel="import" href="cmw-event-card.html">
+    <link rel="import" href="../../paper-material/paper-material.html"/>
+
+    <script>
+
+        var url = "https://centermat-api.herokuapp.com/api/v1/events/schema";
+        var urlExample = "https://centermat-api.herokuapp.com/api/v1/events/example";
+
+        window.onload = function () {
+            value = {"name":"Test"};
+            var eventCard = document.getElementById("eventCard");
+            eventCard.onNotificationClick = function () {
+              alert('Notifying ' + value.name);
+            };
+            eventCard.onWatchClick = function () {
+                alert('Watching ' + value.name);
+            };
+            eventCard.onExpandClick = function () {
+                alert('Expanding ' + value.name);
+            };
+            $.getJSON(url, function (schema) {
+                $.getJSON(urlExample, function (example) {
+                    value = example;
+                    eventCard.event = value;
+                    $("#form1").alpaca({
+                        "schema": schema,
+                        "data": value,
+                        "postRender": function (control) {
+                            console.log(control);
+                            for (var key in control.childrenByPropertyId) {
+                                var child = control.childrenByPropertyId[key];
+                                addKeyup(child, key);
+                            }
+
+                        }
+                    });
+                    updateValue();
+                });
+            });
+            var editor = ace.edit("editor");
+            editor.getSession().setMode("ace/mode/json");
+
+            function addKeyup(child, key) {
+                child.on("keyup", function (e) {
+                    value[key] = this.getValue();
+                    var eventCard = document.getElementById("eventCard");
+                    updateValue();
+                });
+                child.on("change", function (e) {
+                    value[key] = this.getValue();
+                    var eventCard = document.getElementById("eventCard");
+                    updateValue();
+                });
+            }
+
+            function updateValue() {
+                eventCard.event = Object.create(value);
+                editor.setValue(JSON.stringify(value, null, '\t'),1);
+            }
+        };
+
+    </script>
+</head>
+<body style="display: block">
+
+<!-- Runs custom element -->
+<div style="width: 100%;">
+    <cmw-event-card id="eventCard"></cmw-event-card>
+</div>
+<div style="display: flex">
+<paper-material style="width:50%">
+    <h3>Event Form</h3>
+    <div id="form1"></div>
+</paper-material>
+
+<paper-material style="width:50%;float:right">
+    <h3>Event Json</h3>
+    <div id="editor" style="height: 500px">
+        {}</div>
+    </div>
+</paper-material>
+</div>
+</body>
+</html>
